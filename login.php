@@ -50,18 +50,17 @@ include 'config.php';
                   Don't have an account? <a href="register.php" class="text-primary">Create</a>
                 </div>
               </form>
-                <?php
-                    if(isset($_POST['login'])){
-                        $username = $_POST['username'];
-                        $pass = md5($_POST['password']);
-                        $sql = "SELECT * FROM akun WHERE username='$username' AND password='$pass'";
-                        $query = mysqli_query($conn, $sql);
-                        $find = mysqli_num_rows($query);
-                        if ($find==1)
-                        {
-                        $account = mysqli_fetch_assoc($query);
-                        $_SESSION['account'] = $account;
-                        echo "
+              <?php
+              if (isset($_POST['login'])) {
+                $username = $_POST['username'];
+                $pass = md5($_POST['password']);
+                $sql = "SELECT * FROM akun WHERE username='$username' AND password='$pass'";
+                $query = mysqli_query($conn, $sql);
+                $find = mysqli_num_rows($query);
+                if ($find == 1) {
+                  $account = mysqli_fetch_assoc($query);
+                  $_SESSION['account'] = $account;
+                  echo "
                             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
                             <script>
                                 Swal.fire({
@@ -75,22 +74,22 @@ include 'config.php';
                                 });
                             </script>                                    
                             ";
-                        } else {
-                        echo "
+                } else {
+                  echo "
                             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
                             <script>
                                 Swal.fire({
-                                    title: 'Success!',
+                                    title: 'Error!',
                                     text: 'Login failed.',
-                                    icon: 'success',
+                                    icon: 'error',
                                     timer: 3000,
                                     showConfirmButton: false
                                 });
                             </script>                                    
                             ";
-                        }
-                    }
-                ?>
+                }
+              }
+              ?>
             </div>
           </div>
         </div>
